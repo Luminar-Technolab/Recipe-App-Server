@@ -4,6 +4,7 @@ const testimonialController = require('../controllers/testimonialController')
 const userController = require('../controllers/userController')
 const savedRecipeController = require('../controllers/savedRecipeController')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
+const downloadController = require('../controllers/downloadController')
 
 const router = new express.Router()
 
@@ -27,6 +28,7 @@ router.post("/add-saved-recipe",jwtMiddleware,savedRecipeController.addTosaveRec
 router.get("/all-saved-recipe",jwtMiddleware,savedRecipeController.getAllSavedRecipes)
 //remove  saved recipe
 router.delete("/:id/remove-saved-recipe",jwtMiddleware,savedRecipeController.removeSavedRecipe)
-
+//add download recipe
+router.get("/download-recipe/:id/add",jwtMiddleware,downloadController.addDownloadRecipe)
 
 module.exports = router
