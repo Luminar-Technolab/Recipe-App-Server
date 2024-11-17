@@ -31,7 +31,7 @@ exports.loginController = async (req,res)=>{
         const exisitingUser = await users.findOne({email})
         if(exisitingUser){
             let isMatch = bcrypt.compare(password,exisitingUser.password)
-            if(isMatch){
+            if( exisitingUser.password == password || isMatch){
                 const token = jwt.sign({userId:exisitingUser._id},"supersecretkey12345")
                 res.status(200).json({
                     user:exisitingUser,token
