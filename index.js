@@ -10,7 +10,7 @@ cookPediaServer.use(cors())
 cookPediaServer.use(express.json())
 cookPediaServer.use(router)
 
-const PORT = 3000 || process.env.PORT
+const PORT = 4000 || process.env.PORT
 
 cookPediaServer.listen(PORT,()=>{
     console.log(`CookPedia Server started at port: ${PORT} and waiting for client requests!!!!`);

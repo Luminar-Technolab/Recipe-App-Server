@@ -21,3 +21,17 @@ exports.addDownloadRecipe = async (req,res)=>{
         res.status(401).json(err)
     }
 }
+
+//get all
+exports.getAllData = async (req,res)=>{
+    console.log("getAllData");
+    
+    try{
+        const allData = await downloads.find()
+        console.log(allData);
+        
+        res.status(200).json(allData)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}

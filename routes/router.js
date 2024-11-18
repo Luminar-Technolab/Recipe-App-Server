@@ -30,5 +30,10 @@ router.get("/all-saved-recipe",jwtMiddleware,savedRecipeController.getAllSavedRe
 router.delete("/:id/remove-saved-recipe",jwtMiddleware,savedRecipeController.removeSavedRecipe)
 //add download recipe
 router.get("/download-recipe/:id/add",jwtMiddleware,downloadController.addDownloadRecipe)
+//get-all-users 
+router.get("/get-all-users",jwtMiddleware,userController.getAllUsers)
+//get all downloads
+router.get("/get-all-downloads",downloadController.getAllData)
+
 
 module.exports = router
