@@ -34,6 +34,13 @@ router.get("/download-recipe/:id/add",jwtMiddleware,downloadController.addDownlo
 router.get("/get-all-users",jwtMiddleware,userController.getAllUsers)
 //get all downloads
 router.get("/get-all-downloads",downloadController.getAllData)
-
+//add recipe
+router.post("/add-recipe",jwtMiddleware,recipeController.addRecipeController)
+//edit recipe
+router.put("/recipe/:id/edit",jwtMiddleware,recipeController.editRecipeController)
+//remove recipe
+router.delete("/recipe/:id/remove",jwtMiddleware,recipeController.deleteRecipeController)
+//update testimony
+router.get("/testimony/:id/edit",jwtMiddleware,testimonialController.updateTestimonialController)
 
 module.exports = router

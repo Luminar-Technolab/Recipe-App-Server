@@ -42,3 +42,49 @@ exports.getAllRelatedRecipes = async (req,res)=>{
         res.status(401).json(err)
     }
 }
+
+exports.addRecipeController = async (req,res)=>{
+    const {name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,cuisine,caloriesPerServing,image,mealType} = req.body
+    try{
+        const exisitingRecipe = await recipes.findOne({name})
+        if(exisitingRecipe){
+            res.status(406).json("Recipe already exist!!!")
+        }else{
+            const newRecipe = new recipes({
+                name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,cuisine,caloriesPerServing,image,mealType
+            })
+            await newRecipe.save()
+            res.status(200).json(newRecipe)
+        }
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
+
+exports.editRecipeController = async (req,res)=>{
+    const {name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,cuisine,caloriesPerServing,image,mealType} = req.body
+    const {id} = req.params
+    try{
+        
+        const updatedRecipe = await recipes.findByIdAndUpdate({_id:id},{
+            name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,cuisine,caloriesPerServing,image,mealType
+        },{new:true})
+        console.log(updatedRecipe);
+        
+        await updatedRecipe.save()
+        res.status(200).json(updatedRecipe)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
+
+
+exports.deleteRecipeController = async (req,res)=>{
+    const {id} = req.params
+    try{
+        const removedRecipe = await recipes.findByIdAndDelete({_id:id})
+        res.status(200).json(removedRecipe)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
